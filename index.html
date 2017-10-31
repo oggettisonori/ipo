@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf8">
+<title>Ipo</title>
+<script>
+  var socket = new WebSocket("ws://2.225.123.67:8087");
+socket.addEventListener("deviceorientation", traccia, false);
+window.addEventListener ("deviceorientation", traccia, false);
+function traccia(evento){
+  document.querySelector('div.alpha span').innerHTML =
+    Math.round(evento.alpha);
+  socket.send(JSON.stringify({
+    alpha: evento.alpha,
+  }));
+}
+
+  
+  
+/* ricordarsi di specificare l'ip del server WebSocket */
+
+
+ 
+
+</script>
+<style>
+html,body{ height: 100%; }
+body{ 
+  display: box;
+  box-align: center;
+  box-pack: center;
+  font-size: 5em;
+}
+</style>
+<!-- scaricalo da http://leaverou.github.com/prefixfree/ -->
+<script src="../prefixfree.js"></script>
+</head>
+<body>
+<div>
+  <iframe style="position:fixed; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden; z-index:999999;" src="http://2.225.123.67:8086/"></iframe>
+</div>
+</body>
+</html>
